@@ -1,27 +1,28 @@
 ---
-// Access passed-in component props, like `<X title="Hello, World" />`
-const { text } = Astro.props;
+const { text, img, city } = Astro.props;
 ---
 
-<div class="tile">
+<div class="tile" style={{ "--bg": `url(${img.src})` }}>
   <p>{text}</p>
 </div>
 
 <style>
   .tile {
-    background: var(--bg-tile);
-    border: 1px solid var(--tile-border);
+    background: var(--tile-overlay), var(--bg);
+    background-size: cover;
     border-radius: 12px;
+    aspect-ratio: 1 / 1;
     padding: 16px 16px 12px;
     box-shadow: 0 4px 8px var(--shadow);
     transition:
       transform 0.2s,
+      border-color 0.2s,
       box-shadow 0.2s,
       background-color 0.3s;
   }
 
   .tile:nth-child(2n + 1) {
-    background-color: aqua;
+    filter: hue-rotate(90deg);
   }
 
   .tile:hover {
