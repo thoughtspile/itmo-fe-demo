@@ -1,11 +1,166 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Tile from "../components/Tile.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Russian City Facts Tiles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --bg-page: #f0f2f5;
+        --bg-tile: #ffffff;
+        --text-primary: #333;
+        --text-muted: #7f8c8d;
+        --shadow: rgba(0, 0, 0, 0.08);
+        --shadow-hover: rgba(0, 0, 0, 0.12);
+        --tile-border: transparent;
+        --h1-color: #2c3e50;
+      }
+
+      [data-theme="dark"] {
+        --bg-page: #121212;
+        --bg-tile: #1e1e1e;
+        --text-primary: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --shadow: rgba(0, 0, 0, 0.15);
+        --shadow-hover: rgba(0, 0, 0, 0.25);
+        --tile-border: #333;
+        --h1-color: #ecf0f1;
+      }
+
+      /* @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-page: #121212;
+          --bg-tile: #1e1e1e;
+          --text-primary: #f0f0f0;
+          --text-muted: #aaaaaa;
+          --shadow: rgba(0, 0, 0, 0.15);
+          --shadow-hover: rgba(0, 0, 0, 0.25);
+          --tile-border: #333;
+          --h1-color: #ecf0f1;
+        }
+      } */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: var(--bg-page);
+        color: var(--text-primary);
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--h1-color);
+        margin-bottom: 30px;
+      }
+
+      .controls {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .toggle-button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #3498db;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .toggle-button:hover {
+        background: #2980b9;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 500px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 0.85em;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body class="light-theme">
+    <script>
+      // Toggle dark/light theme using the custom properties defined above
+      function toggleTheme() {
+        const body = document.body;
+        const isDark = body.dataset.theme === "dark";
+        body.dataset.theme = isDark ? "light" : "dark";
+      }
+      document
+        .querySelector(".toggle-button")
+        ?.addEventListener("click", toggleTheme);
+    </script>
+
+    <h1>10 Boring Facts About Russian Cities</h1>
+
+    <div class="controls">
+      <button class="toggle-button"> Toggle Dark Theme </button>
+    </div>
+
+    <div class="grid">
+      <Tile
+        text="Moscow is the largest city in Europe, with over 12 million residents and more than 200 metro stations."
+      />
+      <Tile
+        text="St. Petersburg was founded by Tsar Peter the Great in 1703 and is built on around 100 islands connected by hundreds of bridges."
+      />
+      <Tile
+        text="Novosibirsk is the largest city in Siberia and home to the country’s “Silicon Valley” cluster near Akademgorodok."
+      />
+      <Tile
+        text="Kazan, capital of Tatarstan, blends Russian Orthodox churches with Muslim mosques, reflecting its mixed cultural heritage."
+      />
+      <Tile
+        text="Yekaterinburg lies on the border of Europe and Asia and is famous as the place where the last Russian tsar, Nicholas II, was executed."
+      />
+      <Tile
+        text="Nizhny Novgorod has the longest staircase in Russia—the Chkalov Stairs, with 560 steps leading down to the Volga River."
+      />
+      <Tile
+        text="Chelyabinsk is known worldwide for the 2013 meteor explosion that exploded over the city with the force of about 30 Hiroshima bombs."
+      />
+      <Tile
+        text="Omsk was once a place of exile for Fyodor Dostoevsky and now hosts one of Russia’s oldest regional museums."
+      />
+      <Tile
+        text="Samara served as the “reserve capital” of the Soviet Union during World War II when many government offices were moved there."
+      />
+    </div>
+
+    <footer>Generated from general knowledge about Russian cities.</footer>
+  </body>
+</html>

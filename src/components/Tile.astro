@@ -1,0 +1,37 @@
+---
+// Access passed-in component props, like `<X title="Hello, World" />`
+const { text } = Astro.props;
+---
+
+<div class="tile">
+  <p>{text}</p>
+</div>
+
+<style>
+  .tile {
+    background: var(--bg-tile);
+    border: 1px solid var(--tile-border);
+    border-radius: 12px;
+    padding: 16px 16px 12px;
+    box-shadow: 0 4px 8px var(--shadow);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      background-color 0.3s;
+  }
+
+  .tile:nth-child(2n + 1) {
+    background-color: aqua;
+  }
+
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--shadow-hover);
+  }
+
+  .tile p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+</style>
