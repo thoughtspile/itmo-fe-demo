@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Russian City Population Tiles">
+  <input id="search" />
+  <div id="app"></div>
+</Layout>
+
+<script>
+  async function loadCities() {
+    const res = await fetch(
+      "https://storage.yandexcloud.net/travel-blog/cities.json",
+    );
+    const data = await res.json();
+    return data.map((city) => ({
+      ...city,
+      population: Number(city.population.replace(/,/g, "")),
+    }));
+  }
+
+  const app = document.querySelector("#app");
+  const cities = await loadCities();
+  const ul = document.createElement("ul");
+  for (const city of cities) {
+    const li = document.createElement("li");
+    li.innerText = city.name;
+    li.dataset.region = city.region;
+    ul.appendChild(li);
+  }
+  app?.appendChild(ul);
+
+  const search = document.querySelector("#search");
+  search?.addEventListener("input", (e) => {
+    const query = e?.target?.value;
+    for (const li of ul.children) {
+      li.style.display = li.innerText.includes(query) ? null : "none";
+    }
+  });
+</script>
