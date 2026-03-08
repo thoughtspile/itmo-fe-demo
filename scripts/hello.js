@@ -1,7 +1,7 @@
 import sum from 'sum-by';
 import { cities } from './cities.js';
 
-function populationByRegion(cities, region) {
+export function populationByRegion(cities, region) {
     let sum = 0;
     for (const city of cities) {
         if (city.region === region) {

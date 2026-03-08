@@ -57,6 +57,6 @@ onMounted(() => {
     </div>
     
     <ul v-else>
-        <li v-for="city in filteredCities">{{ city.name }}</li>
+      <li v-for="city in filteredCities">{{ city.name }}</li>
     </ul>
 </template>
