@@ -6,6 +6,7 @@ import vue from '@astrojs/vue';
 // https://astro.build/config
 export default defineConfig({
   integrations: [vue()],
+  base: '/itmo-fe-demo'
   // vite: {
   //   build: {
   //     minify: false
